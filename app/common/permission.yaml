@@ -1,0 +1,16 @@
+api:
+  v1:
+    ticket:
+      GET:
+        - read
+    users:
+      <param>:
+        GET:
+          - user
+          - viewer
+      GET:
+        - user
+    lol_champion:
+      GET:
+        - user
+        - viewer
