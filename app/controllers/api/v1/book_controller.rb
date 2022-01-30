@@ -7,9 +7,8 @@ module Api
         render json: Book.all.to_a, status: :ok
       end
 
-      def display
-        id = params[:book_id]
-        book = Book.find(id)
+      def show
+        book = Book.find(params[:id])
 
         a = 'https://zingmp3.vn/video-clip/Yeu-Nhieu-Ghen-Nhieu-Thanh-Hung/123.html, https://zingmp3.vn/video-clip/Yeu-Nhieu-Ghen-Nhieu-Thanh-Hung/456.html'
         mobj = a.scan(Regexp.new('\/((?:bai-hat|video-clip))\/(.*?)\/(.*?)\W', Regexp::IGNORECASE | Regexp::MULTILINE))
@@ -18,6 +17,11 @@ module Api
         end
 
         render json: book, status: :ok
+      end
+
+      def destroy
+        Book.find(params[:id]).destroy!
+        head :no_content
       end
     end
   end

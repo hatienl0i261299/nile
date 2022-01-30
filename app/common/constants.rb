@@ -19,3 +19,6 @@ class ReasonError
     @validateError = 'Validation failed: '
   end
 end
+
+
+FORMAT_DATETIME_OUTPUT = '%H:%M:%S %d-%m-%Y'

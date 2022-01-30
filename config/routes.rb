@@ -9,19 +9,20 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'user_token' => 'user_token#create'
       resources :users, only: %i[index destroy show]
-      resources :nurse, only: %i[index show update]
+      resources :nurse, only: %i[index show update destroy create]
       resources :status, only: [:index]
       resources :message, only: [:index]
       resources :asset, only: %i[index show destroy]
       resources :tree, only: %i[update destroy index show]
       resources :lol_champion, only: %i[index create destroy]
       resources :pokemon_pet, only: %i[index show]
+      resources :media_conan, only: %i[index show]
+      resources :media_one_piece, only: %i[index show]
+      resources :schedule, only: %i[index create update destroy show]
+      resources :author, only: %i[index show destroy]
+      resources :book, only: %i[index show destroy]
 
-      get :authors, action: :index, controller: 'author'
-      get :books, to: 'book#index'
-      get 'book/:book_id/display', to: 'book#display'
-      get 'author/:author_id/display', to: 'author#display'
-      put 'update_nurse_booked/:nurse_schedule_id', to: 'nurse#update_nurse_booked'
+      patch 'update_nurse_booked/', to: 'nurse#update_nurse_booked'
       get 'search_message', to: 'message#search_test'
       get 'tree/:node_id/children', to: 'tree#children', constraints: { node_id: /\d{1,10}/ }
       get 'tree/:node_id/full_parent', to: 'tree#full_parent'

@@ -1,4 +1,3 @@
-
 require_relative '../../../common/helper'
 
 module Api
@@ -6,10 +5,14 @@ module Api
     class PokemonPetController < ApplicationController
 
       def index
-        pokemon = PokemonPet.pagination(params[:page], params[:per_page])
+        pokemon = PokemonPet
+                  .get_info_pokemon_pet
+                  .pagination(params[:page], params[:per_page])
+                  .left_joins(:tree)
+                  .order(updated_at: :desc)
         render json: {
           **pagination(pokemon),
-          data: pokemon
+          data: pokemon.map { |item| PokemonPetSerializer.new(item).serializable_hash }
         }, status: :ok
       end
 

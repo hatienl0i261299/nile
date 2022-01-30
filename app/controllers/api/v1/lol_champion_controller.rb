@@ -5,6 +5,7 @@ module Api
     class LolChampionController < ApplicationController
       def index
         lol_champion = LolChampion
+                       .get_info_lol_champion
                        .left_outer_joins(:tree)
                        .where("tree_id = #{params[:tree_id]}")
         render json: lol_champion, status: :ok

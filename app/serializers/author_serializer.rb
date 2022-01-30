@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-class AuthorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :created_at, :updated_at
-  has_many :books
+class AuthorSerializer < ApplicationSerializer
+  attributes :id, :name, :created_at, :updated_at, :books
+
+  def books
+    object.books.order(id: :asc)
+  end
 end

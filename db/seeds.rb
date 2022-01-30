@@ -9,9 +9,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'colorize'
 
-puts 'Seeding data for Status'.colorize(:green)
-Status.create name: 'Active', active: true
-Status.create name: 'Inactive', active: false
+# puts 'Seeding data for Status'.colorize(:green)
+# Status.create name: 'Active', active: true
+# Status.create name: 'Inactive', active: false
 
 puts 'Seeding data for Group'.colorize(:green)
 Group.create group_role: 'admin', group_name: 'Admin'
@@ -111,7 +111,6 @@ puts 'Seeding data for Nurse'.colorize(:green)
     NurseSchedule.create do |nurse_schedule|
       nurse_schedule.nurse = nurse
       nurse_schedule.schedule = schedule
-      nurse_schedule.booked = false
     end
   end
 end

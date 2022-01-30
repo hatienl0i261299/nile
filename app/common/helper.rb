@@ -17,3 +17,15 @@ def str_to_int(string)
 rescue StandardError
   nil
 end
+
+def str_to_boolean(string)
+  if string.to_s == 'true'
+    true
+  elsif string.to_s == 'false'
+    false
+  else
+    nil
+  end
+rescue StandardError
+  nil
+end

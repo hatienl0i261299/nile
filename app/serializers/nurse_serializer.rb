@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NurseSerializer < ActiveModel::Serializer
+class NurseSerializer < ApplicationSerializer
   attributes :id, :name, :phone, :address, :nurse_schedules
   has_many :nurse_schedules
 
@@ -11,8 +11,8 @@ class NurseSerializer < ActiveModel::Serializer
         time_start: item.schedule.time_start,
         time_end: item.schedule.time_end,
         booked: item.booked,
-        created_at: item.created_at.strftime('%Y/%m/%d %H:%M:%S'),
-        updated_at: item.updated_at.strftime('%Y/%m/%d %H:%M:%S')
+        created_at: item.created_at,
+        updated_at: item.updated_at
       }
     end
   end

@@ -8,9 +8,15 @@ module Api
                            .order(id: :asc), status: :ok
       end
 
-      def display
-        author = Author.find(params[:author_id])
+      def show
+        author = Author.find(params[:id])
         render json: author, status: :ok
+      end
+
+      def destroy
+        author = Author.find(params[:id])
+        author.destroy!
+        head :no_content
       end
     end
   end

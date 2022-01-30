@@ -1,9 +1,8 @@
-class LolChampionSerializer < ApplicationSerializer
+class PokemonPetSerializer < ApplicationSerializer
   attributes :id,
              :name,
              :location,
-             :quote,
-             :summoner_spell,
+             :move,
              :tree,
              :created_at,
              :updated_at
@@ -14,5 +13,4 @@ class LolChampionSerializer < ApplicationSerializer
       name: object.tree_name
     }
   end
-
 end

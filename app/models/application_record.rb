@@ -1,9 +1,18 @@
 # frozen_string_literal: true
 
 require_relative '../common/helper'
+require_relative '../common/constants'
 
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
+
+  def created_at
+    attributes['created_at'].strftime(FORMAT_DATETIME_OUTPUT)
+  end
+
+  def updated_at
+    attributes['updated_at'].strftime(FORMAT_DATETIME_OUTPUT)
+  end
 
   scope :pagination, lambda { |page_num = 1, per_page = 10|
     page_num = str_to_int(page_num)
