@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get 'tree/:node_id/children', to: 'tree#children', constraints: { node_id: /\d{1,10}/ }
       get 'tree/:node_id/full_parent', to: 'tree#full_parent'
       get 'ticket/', to: 'ticket#get_ticket'
+      get 'find_user/', to: 'users#search_by_email'
     end
   end
   match '*unmatched', to: 'application#router_not_found', via: :all

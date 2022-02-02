@@ -42,6 +42,8 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+# gem 'rack-mini-profiler'
+gem 'activerecord-analyze'
 gem 'will_paginate', '~> 3.3', '>= 3.3.1'
 gem 'active_model_serializers'
 gem 'faker'

@@ -20,7 +20,7 @@ module Api
             "''.gsub(/\s+/, ' ')
         )
         tree = Tree.arrange_nodes(asset)
-        render json: tree, adapter: nil, status: :ok
+        render json: tree[0], adapter: nil, status: :ok
       end
 
       def update

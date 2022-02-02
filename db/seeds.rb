@@ -104,7 +104,7 @@ end
 
 puts 'Seeding data for Nurse'.colorize(:green)
 20.times do
-  nurse = Nurse.create(name: Faker::Name.name, phone: Faker::PhoneNumber.phone_number,
+  nurse = Nurse.create(name: Faker::Name.name, phone: Faker::Number.number(digits: 10),
                        address: Faker::Address.street_address)
   nurse.save!
   Schedule.all.map do |schedule|

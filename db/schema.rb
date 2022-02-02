@@ -10,9 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_28_122744) do
+ActiveRecord::Schema.define(version: 2022_02_02_040909) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "btree_gin"
+  enable_extension "fuzzystrmatch"
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "assets", force: :cascade do |t|
@@ -174,8 +177,10 @@ ActiveRecord::Schema.define(version: 2022_01_28_122744) do
     t.string "password_digest"
     t.string "username"
     t.bigint "group_id", null: false
+    t.index ["email"], name: "index_users_on_email", opclass: :text_pattern_ops
     t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["status_id"], name: "index_users_on_status_id"
+    t.index ["username"], name: "index_users_on_username", opclass: :gist_trgm_ops, using: :gist
   end
 
   add_foreign_key "lol_champions", "trees"

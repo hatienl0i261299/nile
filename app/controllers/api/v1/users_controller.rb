@@ -14,7 +14,7 @@ module Api
         user = User
                .get_info_user
                .where(statuses: { active: active })
-               .where("email LIKE '%#{params[:email]}%'")
+               .where("email ILIKE '%#{params[:email]}%'")
                .pagination(params[:page], params[:per_page])
         render json: {
           **pagination(user),
@@ -31,6 +31,44 @@ module Api
         user = User.find(params[:id])
         user.destroy!
         head :no_content
+      end
+
+      def search_by_email
+        email = params[:email]
+        username = params[:username]
+
+        # user = User.where(email: email)
+        #
+        # puts user.analyze
+
+        user = User.username_similar(username)
+
+        puts user.analyze
+
+        render json: user, adapter: nil, status: :ok
+      end
+
+      def similarity(word1, word2)
+        tri1 = trigram(word1)
+        tri2 = trigram(word2)
+
+        return 0.0 if [tri1, tri2].any? { |arr| arr.size.zero? }
+
+        # Find number of trigrams shared between them
+        same_size = (tri1 & tri2).size
+        # Find unique total trigrams in both arrays
+        all_size = (tri1 | tri2).size
+
+        same_size.to_f / all_size
+      end
+
+      def trigram(word)
+        return [] if word.strip == ''
+
+        parts = []
+        padded = "  #{word} ".downcase
+        padded.chars.each_cons(3) { |w| parts << w.join }
+        parts
       end
 
       private

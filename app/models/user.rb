@@ -9,6 +9,14 @@ class User < ApplicationRecord
   has_and_belongs_to_many :roles
   has_secure_password
 
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "'%{value}' is not a valid email" }
+
+  scope :username_similar, lambda { |username|
+    quoted_username = ActiveRecord::Base.connection.quote_string(username)
+    where("username ~ '^#{username}.'")
+      .order(Arel.sql("similarity(username, '#{quoted_username}') DESC"))
+  }
+
   scope :get_info_user, lambda {
     left_joins(:status, :ticket, :group).order(id: :asc)
     # .select([
