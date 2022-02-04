@@ -10,10 +10,10 @@ class UserSerializer < ApplicationSerializer
              :roles,
              :created_at,
              :updated_at
-  has_one :ticket, serializer: TicketSerializer
-  belongs_to :group, serializer: GroupSerializer
-  has_many :roles, serializer: RoleSerializer
-  has_one :status, serializer: StatusSerializer
+  # has_one :ticket, serializer: TicketSerializer
+  # belongs_to :group, serializer: GroupSerializer
+  # has_many :roles, serializer: RoleSerializer
+  # has_one :status, serializer: StatusSerializer
 
   # def roles
   #     object.roles.order('roles.id ASC').map do |role|

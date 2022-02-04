@@ -22,21 +22,7 @@ module Api
 
         message = Message
                   .pagination(params[:page], params[:per_page])
-                  .left_outer_joins(user: :status)
-                  .select([
-                    'messages.id',
-                    'messages.content',
-                    'messages.read',
-                    'messages.user_id',
-                    'users.username',
-                    'users.first_name',
-                    'users.last_name',
-                    'users.email',
-                    'statuses.active',
-                    'users.status_id',
-                    'messages.created_at',
-                    'messages.updated_at'
-                  ].map(&:strip).join(', '))
+                  .includes(user: %i[status roles group ticket])
                   .content_contain(params[:content])
                   .where(read: read)
                   .where(list_email.map { |email| "users.email LIKE '%#{email.strip}%'" }.join(' OR '))

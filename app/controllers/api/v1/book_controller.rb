@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
+require_relative '../../../common/helper'
+
 module Api
   module V1
     class BookController < ApplicationController
       def index
-        render json: Book.all.to_a, status: :ok
+        books = Book.pagination(params[:page], params[:per_page]).order(updated_at: :desc).preload(:authors)
+        render json: {
+          **pagination(books),
+          data: books.map { |item| BookSerializer.new(item).serializable_hash }
+        }, status: :ok
       end
 
       def show
@@ -17,6 +23,17 @@ module Api
         end
 
         render json: book, status: :ok
+      end
+
+      def bulk_update
+        items = params[:_json]
+
+        items.map do |item|
+          data = item[:data].as_json
+          Book.find(item[:id]).update!(**data)
+        end
+
+        head :no_content
       end
 
       def destroy

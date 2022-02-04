@@ -4,7 +4,7 @@ class Message < ApplicationRecord
   belongs_to :user
 
   scope :content_contain, lambda { |content|
-    where(%"lower(content) like '%#{content.present? ? content.downcase : ''}%'")
+    where(%"content ilike '%#{content.present? ? content.downcase : ''}%'")
   }
 
   scope :active_true, lambda {

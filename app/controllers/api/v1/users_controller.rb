@@ -23,7 +23,7 @@ module Api
       end
 
       def show
-        user = User.get_info_user.find(params[:id])
+        user = User.preload(:status, :roles, :group, :ticket).find(params[:id])
         render json: user, status: :ok
       end
 

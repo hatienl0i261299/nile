@@ -3,7 +3,7 @@
 class BookSerializer < ApplicationSerializer
   attributes :id, :title, :content, :created_at, :updated_at, :authors
 
-  def authors
-    object.authors.order(id: :asc)
-  end
+  # def authors
+  #   object.authors.order(id: :asc)
+  # end
 end

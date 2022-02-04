@@ -5,20 +5,16 @@ class MessageSerializer < ApplicationSerializer
   attributes :id,
              :content,
              :read,
-             :user_id,
-             :username,
-             :full_name,
-             :email,
-             :user_activated,
-             :status_id,
+             :user,
+             :status,
              :created_at,
              :updated_at
 
-  def user_activated
-    object.active
+  def status
+    object.user.status
   end
 
-  def full_name
-    "#{object.first_name} #{object.last_name}"
+  def user
+    UserSerializer.new(object.user).serializable_hash
   end
 end

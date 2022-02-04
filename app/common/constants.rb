@@ -20,5 +20,4 @@ class ReasonError
   end
 end
 
-
-FORMAT_DATETIME_OUTPUT = '%H:%M:%S %d-%m-%Y'
+FORMAT_DATETIME_OUTPUT ||= '%H:%M:%S %d-%m-%Y'

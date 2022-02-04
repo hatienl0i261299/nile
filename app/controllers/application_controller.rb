@@ -28,20 +28,29 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :bad_request
   rescue_from ActiveRecord::RecordNotSaved, with: :bad_request
 
-  before_action :authenticate_user
+  before_action :authenticate_user, :set_locale
 
   def router_not_found
     render json: {
-      error: 'Not Found',
+      error: I18n.t('exception.not_found'),
       error_detail: "Routing doesn't work"
     }, status: :not_found
   end
 
   private
 
+  def set_locale
+    locale = request.headers[:locale]
+    I18n.locale = locale || I18n.default_locale
+  end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
+
   def server_internal_error(error = '', message = '')
     render json: {
-      error: 'Internal Server Error',
+      error: I18n.t('exception.server_internal_error'),
       error_detail: message,
       exception: Rails&.env&.production? ? '' : error
     }, status: :internal_server_error
@@ -49,14 +58,14 @@ class ApplicationController < ActionController::API
 
   def bad_request(error = '')
     render json: {
-      error: 'Bad Request',
+      error: I18n.t('exception.bad_request'),
       error_detail: error
     }, status: :bad_request
   end
 
   def not_found(error = '')
     render json: {
-      error: 'Not Found',
+      error: I18n.t('exception.not_found'),
       error_detail: error
     }, status: :not_found
   end

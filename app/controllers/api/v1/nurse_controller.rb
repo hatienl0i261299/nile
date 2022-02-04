@@ -12,45 +12,8 @@ module Api
 
       def show
         nurse_id = params[:id]
-        nurse = Nurse.select(
-          [
-            'nurses.id ',
-            'nurses.name',
-            'nurses.phone',
-            'nurses.address',
-            'nurse_schedules.id as nurse_schedule_id',
-            'nurse_schedules.booked',
-            'nurse_schedules.created_at as nurse_schedule_created_at',
-            'nurse_schedules.updated_at as nurse_schedule_updated_at',
-            'schedules.time_start',
-            'schedules.time_end',
-            'nurses.created_at',
-            'nurses.updated_at'
-          ].map(&:strip).join(', ')
-        ).where(id: nurse_id).joins(nurse_schedules: [:schedule]).order('schedules.id ASC')
-        return bad_request("Couldn't find Nurse with id='#{nurse_id}'") unless nurse.present?
-
-        nurse_info = {
-          id: nurse[0][:id],
-          name: nurse[0][:name],
-          phone: nurse[0][:phone],
-          address: nurse[0][:address],
-          created_at: nurse[0][:created_at].strftime(FORMAT_DATETIME_OUTPUT),
-          updated_at: nurse[0][:updated_at].strftime(FORMAT_DATETIME_OUTPUT),
-        }
-        render json: {
-          **nurse_info,
-          schedules: nurse.map do |item|
-            {
-              id: item[:nurse_schedule_id],
-              booked: item[:booked],
-              time_start: item[:time_start],
-              time_end: item[:time_end],
-              created_at: item[:nurse_schedule_created_at].strftime(FORMAT_DATETIME_OUTPUT),
-              updated_at: item[:nurse_schedule_updated_at].strftime(FORMAT_DATETIME_OUTPUT),
-            }
-          end
-        }, adapter: nil, status: :ok
+        nurse = Nurse.eager_load(:schedules).find(nurse_id)
+        render json: nurse, status: :ok
       end
 
       def update
