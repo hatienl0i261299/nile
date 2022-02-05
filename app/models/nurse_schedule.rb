@@ -15,4 +15,6 @@ class NurseSchedule < ApplicationRecord
 
   belongs_to :schedule
   belongs_to :nurse
+
+  validates :nurse_id, uniqueness: { scope: :schedule_id }
 end

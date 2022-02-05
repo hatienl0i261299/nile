@@ -7,7 +7,7 @@ module Api
       def index
         media_conan = MediaConan
                       .get_info_media_conan
-                      .pagination(params[:page], params[:per_page])
+                      .paging(params[:page], params[:per_page])
                       .left_joins(:tree)
                       .order(updated_at: :desc)
 

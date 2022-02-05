@@ -21,7 +21,7 @@ module Api
         list_email = params[:email] ? params[:email].split(',') : []
 
         message = Message
-                  .pagination(params[:page], params[:per_page])
+                  .paging(params[:page], params[:per_page])
                   .includes(user: %i[status roles group ticket])
                   .content_contain(params[:content])
                   .where(read: read)

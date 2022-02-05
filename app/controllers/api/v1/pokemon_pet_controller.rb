@@ -7,7 +7,7 @@ module Api
       def index
         pokemon = PokemonPet
                   .get_info_pokemon_pet
-                  .pagination(params[:page], params[:per_page])
+                  .paging(params[:page], params[:per_page])
                   .left_joins(:tree)
                   .order(updated_at: :desc)
         render json: {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_040909) do
+ActiveRecord::Schema.define(version: 2022_02_05_055036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2022_02_02_040909) do
     t.bigint "nurse_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["nurse_id", "schedule_id"], name: "index_nurse_schedules_on_nurse_id_and_schedule_id", unique: true
     t.index ["nurse_id"], name: "index_nurse_schedules_on_nurse_id"
     t.index ["schedule_id"], name: "index_nurse_schedules_on_schedule_id"
   end

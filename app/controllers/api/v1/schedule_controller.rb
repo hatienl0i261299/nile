@@ -5,7 +5,7 @@ module Api
   module V1
     class ScheduleController < ApplicationController
       def index
-        schedule = Schedule.all.order(id: :asc).pagination(params[:page], params[:per_page])
+        schedule = Schedule.all.order(id: :asc).paging(params[:page], params[:per_page])
         render json: {
           **pagination(schedule),
           data: schedule.map { |item| ScheduleSerializer.new(item).serializable_hash }
@@ -27,7 +27,7 @@ module Api
 
       def show
         schedule_id = params[:id]
-        nurse_schedule = NurseSchedule.where(schedule_id: schedule_id).pagination(params[:page], params[:per_page])
+        nurse_schedule = NurseSchedule.where(schedule_id: schedule_id).paging(params[:page], params[:per_page])
         render json: {
           **pagination(nurse_schedule),
           data: nurse_schedule.map { |item| NurseScheduleSerializer.new(item).serializable_hash }

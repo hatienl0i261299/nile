@@ -14,7 +14,7 @@ class ApplicationRecord < ActiveRecord::Base
     attributes['updated_at'].strftime(FORMAT_DATETIME_OUTPUT)
   end
 
-  scope :pagination, lambda { |page_num = 1, per_page = 10|
+  scope :paging, lambda { |page_num = 1, per_page = 10|
     page_num = str_to_int(page_num)
     per_page = str_to_int(per_page)
     page = if page_num.present?

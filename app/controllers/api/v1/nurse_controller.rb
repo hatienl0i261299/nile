@@ -7,12 +7,18 @@ module Api
   module V1
     class NurseController < ApplicationController
       def index
-        render json: Nurse.all, status: :ok
+        nurse = Nurse
+                .preload(:schedules)
+                .paging(params[:page], params[:per_page])
+                .all
+        render json: {
+          **pagination(nurse),
+          data: nurse.map { |item| NurseSerializer.new(item).serializable_hash }
+        }, status: :ok
       end
 
       def show
-        nurse_id = params[:id]
-        nurse = Nurse.eager_load(:schedules).find(nurse_id)
+        nurse = Nurse.includes(:schedules).find(params[:id])
         render json: nurse, status: :ok
       end
 
@@ -48,18 +54,36 @@ module Api
 
       def update_nurse_booked
         data = params[:_json]
-        data.map do |item|
-          puts item[:booked]
-          nurse_schedule = NurseSchedule.find(item[:id])
-          booked = str_to_boolean(item[:booked])
-          if [true, false].include? booked
-            nurse_schedule.booked = item[:booked]
-            nurse_schedule.save!
-          else
-            return bad_request "'#{item[:booked]}' is not a valid type"
+        NurseSchedule.transaction do
+          data.map do |item|
+            nurse_schedule = NurseSchedule.find(item[:id])
+            booked = str_to_boolean(item[:booked])
+            if [true, false].include? booked
+              nurse_schedule.booked = item[:booked]
+              nurse_schedule.save!
+            else
+              return bad_request "'#{item[:booked]}' is not a valid type"
+            end
           end
         end
         head :no_content
+      end
+
+      def add_schedules
+        data = params[:_json]
+        nurse_id = params[:nurse_id]
+
+        NurseSchedule.create!(
+          data.map do |item|
+            {
+              booked: false,
+              schedule_id: item['id'],
+              nurse_id: nurse_id,
+            }
+          end
+        )
+
+        head :created
       end
     end
   end

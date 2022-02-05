@@ -6,7 +6,7 @@ module Api
   module V1
     class BookController < ApplicationController
       def index
-        books = Book.pagination(params[:page], params[:per_page]).order(updated_at: :desc).preload(:authors)
+        books = Book.paging(params[:page], params[:per_page]).order(updated_at: :desc).preload(:authors)
         render json: {
           **pagination(books),
           data: books.map { |item| BookSerializer.new(item).serializable_hash }

@@ -7,7 +7,7 @@ module Api
       def index
         media_one_piece = MediaOnePiece
                           .get_info_media_one_piece
-                          .pagination(params[:page], params[:per_page])
+                          .paging(params[:page], params[:per_page])
                           .left_outer_joins!(:tree)
                           .order(updated_at: :desc)
 

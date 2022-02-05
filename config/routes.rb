@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         resources :book, only: %i[index show destroy]
 
         patch 'update_nurse_booked/', to: 'nurse#update_nurse_booked'
+        post 'nurse/add_schedules/:nurse_id', to: 'nurse#add_schedules', constraints: { nurse_id: /\d{1,10}/ }
         get 'search_message', to: 'message#search_test'
         get 'tree/:node_id/children', to: 'tree#children', constraints: { node_id: /\d{1,10}/ }
         get 'tree/:node_id/full_parent', to: 'tree#full_parent'

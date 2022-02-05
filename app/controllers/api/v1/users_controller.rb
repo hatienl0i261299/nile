@@ -15,7 +15,7 @@ module Api
                .get_info_user
                .where(statuses: { active: active })
                .where("email ILIKE '%#{params[:email]}%'")
-               .pagination(params[:page], params[:per_page])
+               .paging(params[:page], params[:per_page])
         render json: {
           **pagination(user),
           data: user.map { |tmp| UserSerializer.new(tmp).serializable_hash }

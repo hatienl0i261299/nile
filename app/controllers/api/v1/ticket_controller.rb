@@ -7,7 +7,7 @@ module Api
     class TicketController < ApplicationController
       def get_ticket
         ticket = Ticket.joins(:user).where("LOWER(tickets.match) LIKE '%#{ params[:match] ? params[:match].downcase : '' }%'")
-                       .pagination(params[:page], params[:per_page])
+                       .paging(params[:page], params[:per_page])
         render json: {
           **pagination(ticket),
           data: ticket.map { |item| TicketSerializer.new(item).serializable_hash }
