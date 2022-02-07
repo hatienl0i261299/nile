@@ -33,6 +33,10 @@ module Api
         head :no_content
       end
 
+      def me
+        render json: @current_user, status: :ok
+      end
+
       def search_by_email
         email = params[:email]
         username = params[:username]

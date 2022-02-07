@@ -77,9 +77,9 @@ class ApplicationController < ActionController::API
   def authenticate_user
     data_permission = YAML.load_file('app/common/permission.yaml')
     original_fullpath = request.original_fullpath.to_s.gsub(%r{(/\?|\?).*}, '').split('/').map(&:strip).reject(&:empty?)
-    current_user ||= AuthorizeApiRequest.new(request.headers).call
-    if current_user
-      user_group_role = current_user.group.group_role
+    @current_user ||= AuthorizeApiRequest.new(request.headers).call
+    if @current_user
+      user_group_role = @current_user.group.group_role
       unless user_group_role == GroupRole.new.admin
         temp_data = data_permission
         original_fullpath.each do |url|
@@ -88,13 +88,12 @@ class ApplicationController < ActionController::API
           temp_data = temp_data[url] || temp_data['<param>']
         end
         roles = temp_data[request.method]
-        p roles
         return if roles.present? && (roles.include? user_group_role)
 
         forbidden
       end
     else
-      head :unauthorized unless current_user
+      head :unauthorized unless @current_user
     end
   end
 end

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         get 'tree/:node_id/full_parent', to: 'tree#full_parent'
         get 'ticket/', to: 'ticket#get_ticket'
         get 'find_user/', to: 'users#search_by_email'
+        get 'me/', to: 'users#me'
         put 'book/bulk_update', to: 'book#bulk_update'
       end
     end

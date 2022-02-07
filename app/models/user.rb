@@ -18,20 +18,6 @@ class User < ApplicationRecord
   }
 
   scope :get_info_user, lambda {
-    left_joins(:status, :ticket, :group).order(id: :asc)
-    # .select([
-    #     "users.id",
-    #     'users.username',
-    #     'users.first_name',
-    #     'users.last_name',
-    #     'users.email',
-    #     'users.status_id',
-    #     'users.group_id',
-    #     'statuses.active',
-    #     'groups.group_role',
-    #     'groups.group_name',
-    #     'users.created_at',
-    #     'users.updated_at',
-    #         ].join(', '))
+    includes(:status, :ticket, :group, :roles).order(id: :asc)
   }
 end
