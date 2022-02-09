@@ -178,3 +178,24 @@ puts 'Seeding data for MediaOnePiece'.colorize(:green)
     one_piece.tree = Tree.all.sample
   end
 end
+
+puts 'Seeding data for Genre'.colorize(:green)
+100.times do
+  Genre.create!(name: Faker::Book.genre)
+end
+
+puts 'Seeding data for Article'.colorize(:green)
+100.times do
+  [].tap do |array|
+    10_000.times do
+      time = Time.current
+      array << {
+        title: Faker::Book.title,
+        genre_id: rand(1..100),
+        updated_at: time,
+        created_at: time
+      }
+    end
+    Article.insert_all!(array)
+  end
+end

@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_05_055036) do
+ActiveRecord::Schema.define(version: 2022_02_07_092720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "genre_id", null: false
+    t.index "to_tsvector('english'::regconfig, (title)::text)", name: "index_articles_on_to_tsvector_english_title", using: :gin
+    t.index ["genre_id"], name: "index_articles_on_genre_id"
+  end
 
   create_table "assets", force: :cascade do |t|
     t.string "name"
@@ -44,6 +53,13 @@ ActiveRecord::Schema.define(version: 2022_02_05_055036) do
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "to_tsvector('english'::regconfig, (name)::text)", name: "index_genres_on_to_tsvector_english_name", using: :gin
   end
 
   create_table "groups", force: :cascade do |t|
@@ -184,6 +200,7 @@ ActiveRecord::Schema.define(version: 2022_02_05_055036) do
     t.index ["username"], name: "index_users_on_username", opclass: :gist_trgm_ops, using: :gist
   end
 
+  add_foreign_key "articles", "genres"
   add_foreign_key "lol_champions", "trees"
   add_foreign_key "media_conans", "trees"
   add_foreign_key "media_one_pieces", "trees"

@@ -51,3 +51,5 @@ gem 'faker'
 gem 'jwt'
 gem 'ancestry'
 gem 'colorize'
+
+gem "pg_search", "~> 2.3"

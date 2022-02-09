@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
         post 'user_token' => 'user_token#create'
+        resources :article, only: %i[index]
         resources :users, only: %i[index destroy show]
         resources :nurse, only: %i[index show update destroy create]
         resources :status, only: [:index]
