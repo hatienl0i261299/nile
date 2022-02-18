@@ -17,6 +17,6 @@ class Article < ApplicationRecord
 
     # joins(:genre).where("to_tsvector('english', genres.name) @@ plainto_tsquery('english', :q)", q: query)
 
-    # pg_search(query)
+    pg_search(query)
   }
 end

@@ -137,7 +137,7 @@ end
 end
 
 puts 'Seeding data for LolChampion'.colorize(:green)
-40.times do
+1_000_000.times do
   LolChampion.create do |lol|
     lol.name = Faker::Games::LeagueOfLegends.champion
     lol.location = Faker::Games::LeagueOfLegends.location

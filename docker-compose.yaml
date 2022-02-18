@@ -18,6 +18,13 @@ services:
       - "3000:3000"
     depends_on:
       - db
+  meilisearch_rails:
+    container_name: meilisearch_rails
+    image: getmeili/meilisearch:latest
+    ports:
+      - "7700:7700"
+    volumes:
+      - meilisearch:/var/lib/meilisearch/data
   adminer_rails:
     container_name: adminer_rails
     image: adminer
@@ -29,3 +36,4 @@ services:
       driver: "none"
 volumes:
   postgres:
+  meilisearch:

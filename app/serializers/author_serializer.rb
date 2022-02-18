@@ -4,6 +4,6 @@ class AuthorSerializer < ApplicationSerializer
   attributes :id, :name, :created_at, :updated_at, :books
 
   def books
-    object.books.order(id: :asc)
+    object.books
   end
 end

@@ -31,3 +31,5 @@ rails_tmp/*
 tmp/
 log/
 .idea
+data.ms
+meilisearch

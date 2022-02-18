@@ -6,9 +6,8 @@ module Api
     class MediaConanController < ApplicationController
       def index
         media_conan = MediaConan
-                      .get_info_media_conan
                       .paging(params[:page], params[:per_page])
-                      .left_joins(:tree)
+                      .includes(:tree)
                       .order(updated_at: :desc)
 
         render json: {

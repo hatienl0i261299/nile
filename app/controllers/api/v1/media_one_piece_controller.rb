@@ -6,9 +6,8 @@ module Api
     class MediaOnePieceController < ApplicationController
       def index
         media_one_piece = MediaOnePiece
-                          .get_info_media_one_piece
+                          .includes(:tree)
                           .paging(params[:page], params[:per_page])
-                          .left_outer_joins!(:tree)
                           .order(updated_at: :desc)
 
         render json: {
