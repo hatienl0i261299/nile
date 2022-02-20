@@ -30,7 +30,7 @@ module Api
                   .order(updated_at: :asc)
         render json: {
           **pagination(message),
-          data: message.map { |temp| MessageSerializer.new(temp).serializable_hash }
+          data: message.map { |item| MessageSerializer.new(item).serializable_hash }
         }, adapter: nil, status: :ok
       end
 

@@ -8,9 +8,8 @@ module Api
     class NurseController < ApplicationController
       def index
         nurse = Nurse
-                .preload(:schedules)
                 .paging(params[:page], params[:per_page])
-                .all
+                .preload(:nurse_schedules, :schedules).order(updated_at: :desc)
         render json: {
           **pagination(nurse),
           data: nurse.map { |item| NurseSerializer.new(item).serializable_hash }
@@ -60,6 +59,8 @@ module Api
             booked = str_to_boolean(item[:booked])
             if [true, false].include? booked
               nurse_schedule.booked = item[:booked]
+              nurse_schedule.nurse.updated_at = Time.current
+              nurse_schedule.nurse.save!
               nurse_schedule.save!
             else
               return bad_request "'#{item[:booked]}' is not a valid type"
@@ -78,7 +79,7 @@ module Api
             {
               booked: false,
               schedule_id: item['id'],
-              nurse_id: nurse_id,
+              nurse_id: nurse_id
             }
           end
         )

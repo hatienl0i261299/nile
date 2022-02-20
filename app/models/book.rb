@@ -2,7 +2,7 @@
 
 class Book < ApplicationRecord
   # https://www.sitepoint.com/master-many-to-many-associations-with-activerecord/
-  has_and_belongs_to_many :authors
+  has_and_belongs_to_many :authors, -> { order(updated_at: :desc) }
 
   validates :title, presence: true, on: [:update, :create]
   validates :content, presence: true

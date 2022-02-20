@@ -55,3 +55,5 @@ gem 'colorize'
 gem "pg_search", "~> 2.3"
 
 gem "meilisearch-rails", "~> 0.5.1"
+
+gem "kaminari", "~> 1.2"
