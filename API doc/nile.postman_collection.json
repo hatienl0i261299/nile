@@ -589,7 +589,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -1281,6 +1281,240 @@
 									"key": "per_page",
 									"value": "12"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get media conan info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{rails_server}}api/v1/media_conan/48",
+							"host": [
+								"{{rails_server}}api"
+							],
+							"path": [
+								"v1",
+								"media_conan",
+								"48"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download media avatar",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{rails_server}}api/v1/media_conan/31/avatar?width=100&height=99",
+							"host": [
+								"{{rails_server}}api"
+							],
+							"path": [
+								"v1",
+								"media_conan",
+								"31",
+								"avatar"
+							],
+							"query": [
+								{
+									"key": "width",
+									"value": "100"
+								},
+								{
+									"key": "height",
+									"value": "99"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create all media conan",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "character",
+									"value": "new media",
+									"type": "text"
+								},
+								{
+									"key": "gadget",
+									"value": "gadcdccc",
+									"type": "text"
+								},
+								{
+									"key": "vehicle",
+									"value": "vecdcdccc",
+									"type": "text"
+								},
+								{
+									"key": "tree_id",
+									"value": "22",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/hatienl0i261299/Pictures/hook-1727484__340.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{rails_server}}api/v1/media_conan",
+							"host": [
+								"{{rails_server}}api"
+							],
+							"path": [
+								"v1",
+								"media_conan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update media conan",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "character",
+									"value": "chacasc",
+									"type": "text"
+								},
+								{
+									"key": "gadget",
+									"value": "gadcd",
+									"type": "text"
+								},
+								{
+									"key": "vehicle",
+									"value": "vecdcd",
+									"type": "text"
+								},
+								{
+									"key": "tree_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/hatienl0i261299/Pictures/hook-1727484__340.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{rails_server}}api/v1/media_conan/43",
+							"host": [
+								"{{rails_server}}api"
+							],
+							"path": [
+								"v1",
+								"media_conan",
+								"43"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete media conan",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "character",
+									"value": "chacasc",
+									"type": "text"
+								},
+								{
+									"key": "gadget",
+									"value": "gadcd",
+									"type": "text"
+								},
+								{
+									"key": "vehicle",
+									"value": "vecdcd",
+									"type": "text"
+								},
+								{
+									"key": "tree_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/hatienl0i261299/Pictures/Screenshot from 2022-02-11 09-42-50.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{rails_server}}api/v1/media_conan/48",
+							"host": [
+								"{{rails_server}}api"
+							],
+							"path": [
+								"v1",
+								"media_conan",
+								"48"
 							]
 						}
 					},

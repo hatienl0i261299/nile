@@ -33,3 +33,4 @@ log/
 .idea
 data.ms
 meilisearch
+storage/

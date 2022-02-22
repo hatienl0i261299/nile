@@ -18,7 +18,7 @@ Rails.application.routes.draw do
         resources :tree, only: %i[update destroy index show]
         resources :lol_champion, only: %i[index create destroy]
         resources :pokemon_pet, only: %i[index show]
-        resources :media_conan, only: %i[index show]
+        resources :media_conan, only: %i[index show create update destroy]
         resources :media_one_piece, only: %i[index show]
         resources :schedule, only: %i[index create update destroy show]
         resources :author, only: %i[index show destroy]
@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         get 'find_user/', to: 'users#search_by_email'
         get 'me/', to: 'users#me'
         put 'book/bulk_update', to: 'book#bulk_update'
+        get 'media_conan/:id_storage_blob/avatar', to: 'media_conan#download_avatar'
       end
     end
     match '*unmatched', to: 'application#router_not_found', via: :all

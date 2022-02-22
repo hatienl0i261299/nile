@@ -187,7 +187,7 @@ end
 puts 'Seeding data for Article'.colorize(:green)
 100.times do
   [].tap do |array|
-    10_000.times do
+    10.times do
       time = Time.current
       array << {
         title: Faker::Book.title,

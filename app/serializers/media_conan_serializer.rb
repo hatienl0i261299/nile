@@ -4,13 +4,11 @@ class MediaConanSerializer < ApplicationSerializer
              :gadget,
              :vehicle,
              :tree,
+             :avatar,
              :created_at,
              :updated_at
 
-  # def tree
-  #   {
-  #     id: object.tree_id,
-  #     name: object.tree_name
-  #   }
-  # end
+  def avatar
+    object.avatar.blob
+  end
 end
