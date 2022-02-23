@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../common/helper'
-require_relative '../../../common/constants'
+require_relative '../../../../common/helper'
 
 module Api
   module V1

@@ -1,5 +1,4 @@
-
-require_relative '../common/constants'
+require_relative '../../common/helper'
 
 class MediaOnePieceSerializer < ApplicationSerializer
   attributes :id,

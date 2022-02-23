@@ -3,7 +3,6 @@
 class User < ApplicationRecord
   belongs_to :status
   belongs_to :group
-  has_many :books
   has_many :messages, dependent: :nullify
   has_one :ticket, dependent: :nullify
   has_and_belongs_to_many :roles

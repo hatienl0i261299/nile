@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative '../../../common/helper'
+require_relative '../../../../common/helper'
 module Api
   module V1
     class MediaConanController < ApplicationController
       def index
         media_conan = MediaConan
                       .paging(params[:page], params[:per_page])
-                      .includes(:tree)
+                      .includes(:tree, avatar_attachment: [:blob])
                       .order(updated_at: :desc)
 
         render json: {

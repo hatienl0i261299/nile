@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM ruby:3.0.3
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client npm\
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client graphviz npm\
   && rm -rf /var/lib/apt/lists/* \
   && curl -o- -L https://yarnpkg.com/install.sh | bash
 RUN mkdir /myapp

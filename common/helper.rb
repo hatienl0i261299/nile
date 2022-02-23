@@ -29,3 +29,25 @@ def str_to_boolean(string)
 rescue StandardError
   nil
 end
+
+# Define text for GroupRole
+class GroupRole
+  attr_reader :admin, :user, :viewer
+
+  def initialize
+    @admin = 'admin'
+    @user = 'user'
+    @viewer = 'viewer'
+  end
+end
+
+# Define text for ReasonError
+class ReasonError
+  attr_reader :validateError
+
+  def initialize
+    @validateError = 'Validation failed: '
+  end
+end
+
+FORMAT_DATETIME_OUTPUT ||= '%H:%M:%S %d-%m-%Y'

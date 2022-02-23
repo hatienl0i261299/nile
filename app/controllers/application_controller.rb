@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 require 'yaml'
-require_relative '../common/constants'
+require_relative '../../common/helper'
 
 # Application controller
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token
   rescue_from Exception, with: :server_internal_error
-  rescue_from ActiveRecord::DeleteRestrictionError, with: :bad_request
   rescue_from ActionController::ParameterMissing, with: :bad_request
   rescue_from NoMethodError, with: :bad_request
   rescue_from ActionController::RoutingError, with: :not_found
@@ -75,7 +74,7 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_user
-    data_permission = YAML.load_file('app/common/permission.yaml')
+    data_permission = YAML.load_file('common/permission.yaml')
     original_fullpath = request.original_fullpath.to_s.gsub(%r{(/\?|\?).*}, '').split('/').map(&:strip).reject(&:empty?)
     @current_user ||= AuthorizeApiRequest.new(request.headers).call
     if @current_user
