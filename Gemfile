@@ -1,16 +1,18 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.3"
+ruby '3.0.3'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 6.1.4.4"
+gem 'rails', '~> 6.1.4.4'
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem 'puma', '~> 5.6.2'
 gem 'rails-i18n'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -23,22 +25,28 @@ gem 'rails-i18n'
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-gem "bcrypt", "~> 3.1.7"
+gem 'bcrypt', '~> 3.1.7'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-gem "rack-cors"
+gem 'rack-cors'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
 
-  gem "rails-erd", "~> 1.6"
+  gem 'brakeman', '~> 5.2'
+
+  gem 'bundler-audit', '~> 0.9.0'
+
+  gem 'rubocop', '~> 1.25'
+
+  gem 'rails-erd', '~> 1.6'
 end
 
 group :development do
@@ -46,16 +54,18 @@ group :development do
   # gem "spring"
 end
 # gem 'rack-mini-profiler'
-gem 'activerecord-analyze'
-gem 'will_paginate', '~> 3.3', '>= 3.3.1'
 gem 'active_model_serializers'
-gem 'faker'
-gem 'jwt'
+gem 'activerecord-analyze'
 gem 'ancestry'
 gem 'colorize'
+gem 'faker'
+gem 'jwt'
+gem 'will_paginate', '~> 3.3', '>= 3.3.1'
 
-gem "pg_search", "~> 2.3"
+gem 'pg_search', '~> 2.3'
 
-gem "meilisearch-rails", "~> 0.5.1"
+gem 'meilisearch-rails', '~> 0.5.1'
 
-gem "kaminari", "~> 1.2"
+gem 'kaminari', '~> 1.2'
+
+gem 'goldiloader', '~> 4.2'

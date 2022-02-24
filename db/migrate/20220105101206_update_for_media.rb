@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateForMedia < ActiveRecord::Migration[6.1]
   def change
     change_column :lol_champions, :tree_id, :bigint, null: true

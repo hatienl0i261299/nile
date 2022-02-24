@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  scope "(:locale)", locale: /en|jp/ do
+  scope '(:locale)', locale: /en|jp/ do
     namespace :api do
       namespace :v1 do
         post 'user_token' => 'user_token#create'
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         resources :message, only: [:index]
         resources :asset, only: %i[index show destroy]
         resources :tree, only: %i[update destroy index show]
-        resources :lol_champion, only: %i[index create destroy]
+        resources :lol_champion, only: %i[index create destroy show]
         resources :pokemon_pet, only: %i[index show]
         resources :media_conan, only: %i[index show create update destroy]
         resources :media_one_piece, only: %i[index show]
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
         get 'me/', to: 'users#me'
         put 'book/bulk_update', to: 'book#bulk_update'
         get 'media_conan/:id_storage_blob/avatar', to: 'media_conan#download_avatar'
+        get 'lol_champion/:id_storage_blob/avatar', to: 'lol_champion#download_avatar'
       end
     end
     match '*unmatched', to: 'application#router_not_found', via: :all

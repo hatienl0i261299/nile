@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLolChampions < ActiveRecord::Migration[6.1]
   def change
     create_table :lol_champions do |t|

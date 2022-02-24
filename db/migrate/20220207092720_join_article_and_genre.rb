@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class JoinArticleAndGenre < ActiveRecord::Migration[6.1]
   def change
     add_reference :articles, :genre, null: false, foreign_key: true

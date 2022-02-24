@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require_relative '../../../../common/helper'
 
@@ -9,7 +10,7 @@ module Api
         render json: {
           **pagination(schedule),
           data: schedule.map { |item| ScheduleSerializer.new(item).serializable_hash }
-        }, adapter: nil , status: :ok
+        }, adapter: nil, status: :ok
       end
 
       def update
@@ -48,4 +49,3 @@ module Api
     end
   end
 end
-

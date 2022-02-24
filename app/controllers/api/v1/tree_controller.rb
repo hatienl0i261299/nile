@@ -13,11 +13,11 @@ module Api
         node_id = params[:id]
         node = Tree.find(node_id)
         asset = Tree.where(
-          ''"
+          "
                 ( trees.parent_path LIKE '#{node.parent_path.present? ? "#{node.parent_path}-" : ''}#{node_id}-%' OR
                 trees.parent_path LIKE '#{node.parent_path.present? ? "#{node.parent_path}-" : ''}#{node_id}' ) OR
                 trees.id = #{node_id}
-            "''.gsub(/\s+/, ' ')
+            ".gsub(/\s+/, ' ')
         )
         tree = Tree.arrange_nodes(asset)
         render json: tree[0], adapter: nil, status: :ok
@@ -61,10 +61,10 @@ module Api
         node = Tree.find(params[:id])
 
         parent_path = node.parent_path
-        all_children = Tree.where(''"
+        all_children = Tree.where("
             trees.parent_path LIKE '#{parent_path.present? ? "#{parent_path}-" : ''}#{params[:id]}-%' OR
             trees.parent_path = '#{parent_path.present? ? "#{parent_path}-" : ''}#{params[:id]}'
-        "''.gsub(/\s+/, ' ')).order(id: :asc)
+        ".gsub(/\s+/, ' ')).order(id: :asc)
 
         # destroy: tất cả các node con cũng sẽ bị xóa bỏ
         # all_children.delete_all
@@ -80,7 +80,7 @@ module Api
         all_children.each do |child|
           new_path = child.parent_path.split('-')
           new_path.delete params[:id]
-          child.parent_path = !new_path.empty? ? new_path.join('-') : nil
+          child.parent_path = new_path.empty? ? nil : new_path.join('-')
           child.save!
         end
 

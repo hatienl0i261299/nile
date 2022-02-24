@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LolChampionSerializer < ApplicationSerializer
   attributes :id,
              :name,
@@ -5,8 +7,13 @@ class LolChampionSerializer < ApplicationSerializer
              :quote,
              :summoner_spell,
              :tree,
+             :avatar,
              :created_at,
              :updated_at
+
+  def avatar
+    object.avatar.blob
+  end
 
   # def tree
   #   {
@@ -14,5 +21,4 @@ class LolChampionSerializer < ApplicationSerializer
   #     name: object.tree_name
   #   }
   # end
-
 end

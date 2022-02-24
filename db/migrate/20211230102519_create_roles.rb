@@ -1,9 +1,11 @@
-class CreateRoles < ActiveRecord::Migration[6.1]
-    def change
-        create_table :roles do |t|
-            t.string :name
+# frozen_string_literal: true
 
-            t.timestamps
-        end
+class CreateRoles < ActiveRecord::Migration[6.1]
+  def change
+    create_table :roles do |t|
+      t.string :name
+
+      t.timestamps
     end
+  end
 end

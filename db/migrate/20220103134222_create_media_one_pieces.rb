@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateMediaOnePieces < ActiveRecord::Migration[6.1]
   def change
     create_table :media_one_pieces do |t|

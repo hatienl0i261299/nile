@@ -1,10 +1,12 @@
-class CreateBooks < ActiveRecord::Migration[6.1]
-    def change
-        create_table :books do |t|
-            t.string :title
-            t.string :content
+# frozen_string_literal: true
 
-            t.timestamps
-        end
+class CreateBooks < ActiveRecord::Migration[6.1]
+  def change
+    create_table :books do |t|
+      t.string :title
+      t.string :content
+
+      t.timestamps
     end
+  end
 end

@@ -4,7 +4,7 @@ class AuthenticationTokenService
   HMAC_SECRET = 'caklsmclkasmceuiro(*&#)(!*@casc,a;s*(&12cnas'
   # ALGORITHM_TYPE = 'RS512'
   ALGORITHM_TYPE = 'HS256'
-  EXP = Time.now.to_i + 4 * 3600 # 4 hours
+  EXP = Time.now.to_i + (4 * 3600) # 4 hours
   AUD = ['!@(&#(Cc898)S(*D&', '(S&*90caLSCM<lasc;l )', '90890a8s90(*#(@c.~cd;d.;'].freeze
   IAT = Time.now.to_i
   JTI_RAW = [HMAC_SECRET, IAT].join(':').to_s

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePokemonPets < ActiveRecord::Migration[6.1]
   def change
     create_table :pokemon_pets do |t|

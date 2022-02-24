@@ -6,7 +6,7 @@ module Api
   module V1
     class TicketController < ApplicationController
       def get_ticket
-        ticket = Ticket.includes(user: [:status]).where("LOWER(match) LIKE '%#{ params[:match] ? params[:match].downcase : '' }%'")
+        ticket = Ticket.includes(user: [:status]).where("LOWER(match) LIKE '%#{params[:match] ? params[:match].downcase : ''}%'")
                        .paging(params[:page], params[:per_page]).order(updated_at: :asc)
         render json: {
           **pagination(ticket),

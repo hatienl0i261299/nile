@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MediaConanSerializer < ApplicationSerializer
   attributes :id,
              :character,

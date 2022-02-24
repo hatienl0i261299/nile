@@ -8,8 +8,8 @@ module Api
         node = Asset.find(node_id)
         asset = Asset.where(
           "( assets.ancestry LIKE '#{node.ancestry}/#{node_id}/%' OR " \
-                                "assets.ancestry LIKE '#{node.ancestry}/#{node_id}' ) OR " \
-                "assets.id = #{node_id}"
+          "assets.ancestry LIKE '#{node.ancestry}/#{node_id}' ) OR " \
+          "assets.id = #{node_id}"
         )
         tree = Asset.arrange_nodes(asset)
         render json: tree, status: :ok

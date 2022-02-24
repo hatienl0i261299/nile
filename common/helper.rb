@@ -19,12 +19,11 @@ rescue StandardError
 end
 
 def str_to_boolean(string)
-  if string.to_s == 'true'
+  case string.to_s
+  when 'true'
     true
-  elsif string.to_s == 'false'
+  when 'false'
     false
-  else
-    nil
   end
 rescue StandardError
   nil
@@ -50,4 +49,4 @@ class ReasonError
   end
 end
 
-FORMAT_DATETIME_OUTPUT ||= '%H:%M:%S %d-%m-%Y'
+FORMAT_DATETIME_OUTPUT = '%H:%M:%S %d-%m-%Y'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PokemonPet < ApplicationRecord
   belongs_to :tree
 

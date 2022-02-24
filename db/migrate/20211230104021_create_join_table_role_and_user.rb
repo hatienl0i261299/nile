@@ -1,7 +1,8 @@
-class CreateJoinTableRoleAndUser < ActiveRecord::Migration[6.1]
-    def change
-        create_join_table :users, :roles do |t|
+# frozen_string_literal: true
 
-        end
+class CreateJoinTableRoleAndUser < ActiveRecord::Migration[6.1]
+  def change
+    create_join_table :users, :roles do |t|
     end
+  end
 end

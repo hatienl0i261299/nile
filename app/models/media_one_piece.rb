@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MediaOnePiece < ApplicationRecord
   belongs_to :tree
 
@@ -16,7 +18,7 @@ class MediaOnePiece < ApplicationRecord
         'trees.name as tree_name',
         'trees.parent_path as tree_parent_path',
         'trees.created_at as tree_created_at',
-        'trees.updated_at as tree_updated_at',
+        'trees.updated_at as tree_updated_at'
       ].map(&:strip).join(', ')
     )
   }

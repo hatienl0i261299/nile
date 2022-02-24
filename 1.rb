@@ -10,4 +10,3 @@ end
 
 temp = TestClass.new
 p temp.test
-

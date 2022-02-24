@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require_relative '../../../../common/helper'
 
 module Api
   module V1
     class PokemonPetController < ApplicationController
-
       def index
         pokemon = PokemonPet
                   .get_info_pokemon_pet
@@ -15,7 +16,6 @@ module Api
           data: pokemon.map { |item| PokemonPetSerializer.new(item).serializable_hash }
         }, status: :ok
       end
-
     end
   end
 end

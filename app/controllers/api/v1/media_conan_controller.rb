@@ -22,14 +22,14 @@ module Api
 
       def download_avatar
         storage_blob = ActiveStorage::Blob.find(params[:id_storage_blob])
-        width = str_to_int(params[:width])
-        height = str_to_int(params[:height])
-        if width.present? && height.present?
-          new_blob = storage_blob.representation(resize_to_limit: [width, height]).processed
-          send_data new_blob.download, type: storage_blob.content_type
-        else
-          send_data storage_blob.download, type: storage_blob.content_type
-        end
+        # width = str_to_int(params[:width])
+        # height = str_to_int(params[:height])
+        # if width.present? && height.present?
+        #   new_blob = storage_blob.representation(resize_to_limit: [width, height]).processed
+        #   send_data new_blob.download, type: storage_blob.content_type
+        # else
+        # end
+        send_data storage_blob.download, type: storage_blob.content_type, file_name: storage_blob.filename
       end
 
       def create

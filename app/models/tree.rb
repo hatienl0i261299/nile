@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Tree < ApplicationRecord
-
   has_many :lol_champions, dependent: :nullify
   has_many :media_conans, dependent: :nullify
   has_many :media_one_pieces, dependent: :nullify

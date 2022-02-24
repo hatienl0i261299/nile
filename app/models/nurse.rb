@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Nurse < ApplicationRecord
   has_many :nurse_schedules, dependent: :destroy
   has_many :schedules, -> { order(id: :asc) }, through: :nurse_schedules
