@@ -5,7 +5,6 @@ class User < ApplicationRecord
   belongs_to :group
   has_many :messages, dependent: :nullify
   has_one :ticket, dependent: :nullify
-  has_and_belongs_to_many :roles
   has_secure_password
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "'%{value}' is not a valid email" }
@@ -17,6 +16,6 @@ class User < ApplicationRecord
   }
 
   scope :get_info_user, lambda {
-    includes(:status, :ticket, :group, :roles).order(id: :asc)
+    includes(:status, :ticket, group: [:roles])
   }
 end

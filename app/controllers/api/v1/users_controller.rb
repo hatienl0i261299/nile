@@ -6,6 +6,8 @@ module Api
   module V1
     class UsersController < ApplicationController
       def index
+        return forbidden unless permission?('admin', 'read')
+
         active = if params[:active]
                    JSON.parse params[:active]
                  else
@@ -15,7 +17,7 @@ module Api
                .get_info_user
                .where(statuses: { active: active })
                .where("email ILIKE '%#{params[:email]}%'")
-               .paging(params[:page], params[:per_page])
+               .paging(params[:page], params[:per_page]).order(updated_at: :desc)
         render json: {
           **pagination(user),
           data: user.map { |tmp| UserSerializer.new(tmp).serializable_hash }
@@ -23,11 +25,12 @@ module Api
       end
 
       def show
-        user = User.preload(:status, :roles, :group, :ticket).find(params[:id])
-        render json: user, status: :ok
+        render json: User.find(params[:id]), status: :ok
       end
 
       def destroy
+        return forbidden unless permission?('viewer', 'read')
+
         user = User.find(params[:id])
         user.destroy!
         head :no_content

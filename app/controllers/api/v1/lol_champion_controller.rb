@@ -28,7 +28,7 @@ module Api
       end
 
       def show
-        render json: LolChampion.auto_include(true).find(params[:id]), status: :ok
+        render json: LolChampion.find(params[:id]), status: :ok
       end
 
       def download_avatar

@@ -22,7 +22,7 @@ module Api
 
         message = Message
                   .paging(params[:page], params[:per_page])
-                  .includes(user: %i[status roles group ticket])
+                  .includes(user: [:status, :ticket, { group: [:roles] }])
                   .content_contain(params[:content])
                   .where(read: read)
                   .where(list_email.map { |email| "users.email LIKE '%#{email.strip}%'" }.join(' OR '))

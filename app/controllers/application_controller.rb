@@ -73,26 +73,37 @@ class ApplicationController < ActionController::API
     head :forbidden
   end
 
+  def permission?(group, role)
+    return true if @current_user.group.group_role == group && (@current_user.group.roles.pluck('name').include? role)
+
+    false
+  end
+
   def authenticate_user
-    data_permission = YAML.load_file('common/permission.yaml')
-    original_fullpath = request.original_fullpath.to_s.gsub(%r{(/\?|\?).*}, '').split('/').map(&:strip).reject(&:empty?)
     @current_user ||= AuthorizeApiRequest.new(request.headers).call
+    # data_permission = YAML.load_file('common/permission.yaml')
+    # original_fullpath = request.original_fullpath.to_s.gsub(%r{(/\?|\?).*}, '').split('/').map(&:strip).reject(&:empty?)
     if @current_user
-      user_group_role = @current_user.group.group_role
-      unless user_group_role == GroupRole.new.admin
-        temp_data = data_permission
-        original_fullpath.each do |url|
-          return forbidden unless temp_data.present?
-
-          temp_data = temp_data[url] || temp_data['<param>']
-        end
-        roles = temp_data[request.method]
-        return if roles.present? && (roles.include? user_group_role)
-
-        forbidden
-      end
+      # user_group_role = @current_user.group.group_role
+      # unless user_group_role == GroupRole.new.admin
+      #   temp_data = data_permission
+      #   original_fullpath.each do |url|
+      #     return forbidden unless temp_data.present?
+      #
+      #     temp_data = temp_data[url] || temp_data['<param>']
+      #   end
+      #
+      #   return forbidden unless temp_data.present?
+      #
+      #   roles = temp_data[request.method]
+      #   return if (roles.present? && (roles.include? user_group_role)) || roles == ['ALL']
+      #
+      #   forbidden
+      # end
     else
       head :unauthorized unless @current_user
     end
+  rescue StandardError => _e
+    forbidden
   end
 end

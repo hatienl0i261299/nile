@@ -13,7 +13,7 @@ RUN npm install -g yarn
 COPY script.sh /usr/bin/
 RUN chmod +x /usr/bin/script.sh
 ENTRYPOINT ["script.sh"]
-EXPOSE 3000
+EXPOSE 8888
 
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]

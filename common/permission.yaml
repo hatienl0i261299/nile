@@ -10,7 +10,23 @@ api:
           - viewer
       GET:
         - user
+    me:
+      GET:
+        - viewer
     lol_champion:
       GET:
-        - user
-        - viewer
+        - ALL
+      <param>:
+        GET:
+          - ALL
+    media_conan:
+      GET:
+        - ALL
+      POST:
+        - ALL
+      <param>:
+        GET:
+          - ALL
+        avatar:
+          GET:
+            - ALL

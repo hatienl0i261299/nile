@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_222_023_619) do
+ActiveRecord::Schema.define(version: 20_220_226_131_129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'btree_gin'
   enable_extension 'fuzzystrmatch'
@@ -26,8 +26,7 @@ ActiveRecord::Schema.define(version: 20_220_222_023_619) do
     t.bigint 'blob_id', null: false
     t.datetime 'created_at', null: false
     t.index ['blob_id'], name: 'index_active_storage_attachments_on_blob_id'
-    t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness',
-                                                    unique: true
+    t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness', unique: true
   end
 
   create_table 'active_storage_blobs', force: :cascade do |t|
@@ -53,8 +52,7 @@ ActiveRecord::Schema.define(version: 20_220_222_023_619) do
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
     t.bigint 'genre_id', null: false
-    t.index "to_tsvector('english'::regconfig, (title)::text)", name: 'index_articles_on_to_tsvector_english_title',
-                                                                using: :gin
+    t.index "to_tsvector('english'::regconfig, (title)::text)", name: 'index_articles_on_to_tsvector_english_title', using: :gin
     t.index ['genre_id'], name: 'index_articles_on_genre_id'
   end
 
@@ -90,8 +88,7 @@ ActiveRecord::Schema.define(version: 20_220_222_023_619) do
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.index "to_tsvector('english'::regconfig, (name)::text)", name: 'index_genres_on_to_tsvector_english_name',
-                                                               using: :gin
+    t.index "to_tsvector('english'::regconfig, (name)::text)", name: 'index_genres_on_to_tsvector_english_name', using: :gin
   end
 
   create_table 'groups', force: :cascade do |t|
@@ -99,6 +96,11 @@ ActiveRecord::Schema.define(version: 20_220_222_023_619) do
     t.string 'group_name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+  end
+
+  create_table 'groups_roles', id: false, force: :cascade do |t|
+    t.bigint 'group_id', null: false
+    t.bigint 'role_id', null: false
   end
 
   create_table 'lol_champions', force: :cascade do |t|
@@ -176,11 +178,6 @@ ActiveRecord::Schema.define(version: 20_220_222_023_619) do
     t.string 'name'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-  end
-
-  create_table 'roles_users', id: false, force: :cascade do |t|
-    t.bigint 'user_id', null: false
-    t.bigint 'role_id', null: false
   end
 
   create_table 'schedules', force: :cascade do |t|

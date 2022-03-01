@@ -46,16 +46,23 @@ User.create do |user|
   user.username = 'root'
   user.password = 'root'
   user.group = Group.first
-  Role.all.map do |role|
-    user.roles << role
-  end
+  user.status = Status.where(active: true).first
+end
+
+User.create do |user|
+  user.first_name = 'root1'
+  user.last_name = 'root1'
+  user.email = 'root1@gmail.com'
+  user.username = 'root1'
+  user.password = 'root1'
+  user.group = Group.first
   user.status = Status.where(active: true).first
 end
 
 100.times do
-  user = User.all.sample
+  group = Group.all.sample
   role = Role.all.sample
-  user.roles << role unless user.roles.include? role
+  group.roles << role unless group.roles.include? role
 end
 
 puts 'Seeding data for Message'.colorize(:green)
